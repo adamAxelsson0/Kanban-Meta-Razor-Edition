@@ -5,12 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using RazorPagesApplication.Models;
 
 namespace RazorPagesApplication.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
+
+        public Board Board { get; set; }
+        public Column Column { get; set; }
+        public Task Task { get; set; }
+        public ItemDetails ItemDetails { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger)
         {
