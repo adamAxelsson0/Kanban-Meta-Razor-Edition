@@ -31,7 +31,10 @@ namespace RazorPagesApplication.Pages
         {
             var boardTitle = Request.Form["create-board-title"];
             Console.WriteLine(boardTitle);
-            return RedirectToPage("/Index");
+            // TODO: Save to database
+            //RazorPagesApplication.Models.Board board = await 
+            //return RedirectToPage($"/Board/{board.Id}");
+            return RedirectToPage($"/Index");
         }
     }
 }
