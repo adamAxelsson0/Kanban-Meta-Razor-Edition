@@ -29,6 +29,8 @@ namespace RazorPagesApplication.Pages
         }
         public IActionResult OnPost()
         {
+            var boardTitle = Request.Form["create-board-title"];
+            Console.WriteLine(boardTitle);
             return RedirectToPage("/Index");
         }
     }
