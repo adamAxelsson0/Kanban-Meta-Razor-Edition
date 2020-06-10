@@ -1,0 +1,15 @@
+@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Create Board";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+<form>
+          <div class="form-group" method="post">
+            <label for="create-board-title" class="col-form-label">Create Board:</label>
+            <input type="text" class="form-control" id="create-board-title" placeholder="Create board...">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+</form>
