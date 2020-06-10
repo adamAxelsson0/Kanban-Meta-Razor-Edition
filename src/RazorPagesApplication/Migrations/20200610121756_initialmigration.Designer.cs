@@ -8,8 +8,8 @@ using RazorPagesApplication.Context;
 namespace RazorPagesApplication.Migrations
 {
     [DbContext(typeof(KanbanContext))]
-    [Migration("20200610095059_initial migrations")]
-    partial class initialmigrations
+    [Migration("20200610121756_initialmigration")]
+    partial class initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,6 +22,9 @@ namespace RazorPagesApplication.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -36,6 +39,9 @@ namespace RazorPagesApplication.Migrations
 
                     b.Property<long>("BoardId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -53,6 +59,12 @@ namespace RazorPagesApplication.Migrations
                     b.Property<long>("ColumnId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ColumnId");
@@ -60,29 +72,10 @@ namespace RazorPagesApplication.Migrations
                     b.ToTable("Items");
                 });
 
-            modelBuilder.Entity("RazorPagesApplication.Models.ItemDetail", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<long>("ItemId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
-
-                    b.ToTable("ItemDetails");
-                });
-
             modelBuilder.Entity("RazorPagesApplication.Models.Column", b =>
                 {
                     b.HasOne("RazorPagesApplication.Models.Board", "Board")
-                        .WithMany()
+                        .WithMany("Columns")
                         .HasForeignKey("BoardId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -91,17 +84,8 @@ namespace RazorPagesApplication.Migrations
             modelBuilder.Entity("RazorPagesApplication.Models.Item", b =>
                 {
                     b.HasOne("RazorPagesApplication.Models.Column", "Column")
-                        .WithMany()
+                        .WithMany("Items")
                         .HasForeignKey("ColumnId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RazorPagesApplication.Models.ItemDetail", b =>
-                {
-                    b.HasOne("RazorPagesApplication.Models.Item", "Item")
-                        .WithMany()
-                        .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

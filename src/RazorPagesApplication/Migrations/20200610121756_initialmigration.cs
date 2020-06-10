@@ -2,7 +2,7 @@
 
 namespace RazorPagesApplication.Migrations
 {
-    public partial class initialmigrations : Migration
+    public partial class initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +11,8 @@ namespace RazorPagesApplication.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -24,6 +25,7 @@ namespace RazorPagesApplication.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(nullable: true),
                     BoardId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
@@ -43,6 +45,8 @@ namespace RazorPagesApplication.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     ColumnId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
@@ -56,35 +60,10 @@ namespace RazorPagesApplication.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "ItemDetails",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    ItemId = table.Column<long>(nullable: false),
-                    Description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ItemDetails", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ItemDetails_Items_ItemId",
-                        column: x => x.ItemId,
-                        principalTable: "Items",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Columns_BoardId",
                 table: "Columns",
                 column: "BoardId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ItemDetails_ItemId",
-                table: "ItemDetails",
-                column: "ItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Items_ColumnId",
@@ -94,9 +73,6 @@ namespace RazorPagesApplication.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "ItemDetails");
-
             migrationBuilder.DropTable(
                 name: "Items");
 
