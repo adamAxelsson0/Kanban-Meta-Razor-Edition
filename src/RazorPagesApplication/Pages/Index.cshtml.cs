@@ -16,7 +16,7 @@ namespace RazorPagesApplication.Pages
         public Board Board { get; set; }
         public Column Column { get; set; }
         public Item Item { get; set; }
-        public ItemDetails ItemDetails { get; set; }
+        public ItemDetail ItemDetail { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger)
         {
