@@ -9,10 +9,11 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" 
+        style="background: rgb(58,78,180);background: linear-gradient(270deg, rgba(58,78,180,1) 0%, rgba(29,148,253,1) 50%, rgba(255,255,255,1) 100%);">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">
-                <img src="https://i.pinimg.com/280x280_RS/0f/b8/e6/0fb8e676a1cd0eae9b0f7ea862c40f93.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+                <img src="https://media.trustradius.com/product-logos/mG/LY/3U4TA8KT099D.PNG" width="30" height="30" class="d-inline-block align-top" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -46,24 +47,20 @@
                       <a class="dropdown-item" asp-area="" asp-page="/Index">BoardPlaceHolder</a>
                     </div>
                      </li>
-
-                     <li class="nav-item">
-                            <a class="nav-link text-dark" style="float: right;" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container" >
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="background: rgb(58,78,180);background: linear-gradient(270deg, rgba(58,78,180,1) 0%, rgba(29,148,253,1) 50%, rgba(255,255,255,1) 100%);">
         <div class="container">
-            &copy; 2020 - RazorPagesApplication - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2020 - KanBan-Meta-Razor-Edition - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 
