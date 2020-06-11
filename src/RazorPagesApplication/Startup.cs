@@ -26,6 +26,7 @@ namespace RazorPagesApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            // services.Add(BoardService);
             services.AddDbContext<KanbanContext>(options => {
                 options.UseSqlite("data source=data/kanban.db");
             });
