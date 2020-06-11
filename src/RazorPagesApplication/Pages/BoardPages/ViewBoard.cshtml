@@ -1,7 +1,8 @@
-@page ""
+@page "{id}"
 @model ViewBoardModel
 @{
     ViewData["Title"] = "View Board";
 }
-<h3>Id = @ViewData["Id"]</h3>
+<h3>Id = @Model.board.Id</h3>
+
 

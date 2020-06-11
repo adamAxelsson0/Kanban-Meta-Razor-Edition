@@ -12,6 +12,7 @@ namespace RazorPagesApplication.Pages.BoardPages
     public class ViewBoardModel : PageModel
     {
         private readonly ILogger<ViewBoardModel> _logger;
+        public Board board { get; set; }
 
         public ViewBoardModel(ILogger<ViewBoardModel> logger)
         {
@@ -19,7 +20,8 @@ namespace RazorPagesApplication.Pages.BoardPages
         }
         public void OnGet(int id)
         {
-        ViewData["Id"] = id;
+            //TODO GET BOARD, placeholder for now
+            board = new Board(id, "Placeholder title");
         }
     }
 }
