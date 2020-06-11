@@ -7,20 +7,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using RazorPagesApplication.Models;
 
-namespace RazorPagesApplication.Pages
+namespace RazorPagesApplication.Pages.BoardPages
 {
-    public class IndexModel : PageModel
+    public class ViewBoardModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<ViewBoardModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public ViewBoardModel(ILogger<ViewBoardModel> logger)
         {
             _logger = logger;
         }
-
-        public void OnGet()
+        public void OnGet(int id)
         {
-
+        ViewData["Id"] = id;
         }
     }
 }
