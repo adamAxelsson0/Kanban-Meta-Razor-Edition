@@ -27,7 +27,7 @@ namespace RazorPagesApplication.Pages.BoardPages
         }
         public IActionResult OnPost(int id)
         {
-            var columnTitle = Request.Form["create-column-title"];
+            var columnTitle = Request.Form["create-column"];
             Column = new Column(1, columnTitle);
 
             CreateBoard(id);
