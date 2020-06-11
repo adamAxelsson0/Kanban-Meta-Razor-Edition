@@ -11,9 +11,9 @@ namespace RazorPagesApplication.Models
         public string Title { get; private set; }
         public List<Column> Columns { get; private set; }
 
-        public Board(long _id, string _title){
-            this.Id = _id;
-            this.Title = _title;
+        public Board(long id, string title){
+            this.Id = id;
+            this.Title = title;
         }
     }
 }
