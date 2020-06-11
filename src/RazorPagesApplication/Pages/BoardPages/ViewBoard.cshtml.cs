@@ -12,7 +12,8 @@ namespace RazorPagesApplication.Pages.BoardPages
     public class ViewBoardModel : PageModel
     {
         private readonly ILogger<ViewBoardModel> _logger;
-        public Board board { get; set; }
+        public Column Column { get; set; }
+        public Board Board { get; set; }
 
         public ViewBoardModel(ILogger<ViewBoardModel> logger)
         {
@@ -21,7 +22,25 @@ namespace RazorPagesApplication.Pages.BoardPages
         public void OnGet(int id)
         {
             //TODO GET BOARD, placeholder for now
-            board = new Board(id, "Placeholder title");
+            CreateBoard(id);
+
+        }
+        public IActionResult OnPost(int id)
+        {
+            var createdColumn = Request.Form["create-column-form"];
+            if (Request.Form["create-column-form"])
+            {
+            var columnTitle = Request.Form["create-column"]
+            Column = new Column(1, columnTitle);
+
+            CreateBoard(id);
+            Board.AddColumn(Column);
+            return RedirectToPage("/BoardPages/ViewBoard", new { id = Board.Id });
+            }
+        }
+        public void CreateBoard(long id)
+        {
+            Board = new Board(id, "Placeholder title");
         }
     }
 }

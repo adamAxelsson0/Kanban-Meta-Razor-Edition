@@ -12,6 +12,10 @@ namespace RazorPagesApplication.Models
         public long BoardId { get; private set; }
         public Board Board { get; private set; }
         public List<Item> Items { get; private set; }
+        public Column(long id, string title)
+        {
+            
+        }
 
     }
 }
