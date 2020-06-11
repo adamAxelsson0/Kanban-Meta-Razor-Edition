@@ -3,6 +3,44 @@
 @{
     ViewData["Title"] = "View Board";
 }
-<h3>Id = @Model.board.Id</h3>
-
-
+@if (Model.Board != null)
+{
+<h3>Id = @Model.Board.Id</h3>
+<h3>Id = @Model.Board.Title</h3>
+<form method="post">
+                <div class="form-group">
+                <label for="create-column">Add Column:</label>
+                <input type="text" class="form-control" id="create-column-title" placeholder="Add column title..." name="create-column-title">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+}
+@if (Model.Board.Columns != null)
+{
+@foreach (var column in Model.Board.Columns)
+{
+    <div class="card-deck">
+        <div class="card">
+            <div class="card-body">
+            <h5 class="card-title">@Model.Board.Columns</h5>
+            @foreach (var item in column.Items)
+            {
+            <div class="card">
+            <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            </div>
+            </div>
+            }
+            <form method="post">
+                <div class="form-group">
+                <label for="create-item">New Item:</label>
+                <input type="text" class="form-control" id="create-item" placeholder="New Item..." name="create-item">
+                </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            </div>
+        </div>
+    </div>
+}
+}
