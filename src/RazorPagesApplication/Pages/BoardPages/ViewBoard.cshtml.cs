@@ -27,16 +27,12 @@ namespace RazorPagesApplication.Pages.BoardPages
         }
         public IActionResult OnPost(int id)
         {
-            var createdColumn = Request.Form["create-column-form"];
-            if (Request.Form["create-column-form"])
-            {
-            var columnTitle = Request.Form["create-column"]
+            var columnTitle = Request.Form["create-column-title"];
             Column = new Column(1, columnTitle);
 
             CreateBoard(id);
             Board.AddColumn(Column);
             return RedirectToPage("/BoardPages/ViewBoard", new { id = Board.Id });
-            }
         }
         public void CreateBoard(long id)
         {
