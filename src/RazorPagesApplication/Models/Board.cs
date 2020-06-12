@@ -16,5 +16,8 @@ namespace RazorPagesApplication.Models
             this.Title = title;
             this.Columns = new List<Column>();
         }
+        public void AddColumn(Column column){
+            this.Columns.Add(column);
+        }
     }
 }
