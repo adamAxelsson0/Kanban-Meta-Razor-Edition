@@ -2,6 +2,8 @@ using RazorPagesApplication.Context;
 using Microsoft.EntityFrameworkCore;  
 using RazorPagesApplication.Models;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RazorPagesApplication.DataAccess
 {
@@ -21,14 +23,14 @@ namespace RazorPagesApplication.DataAccess
         public async Task<IEnumerable<Column>> GetColumnsFromBoardId(long boardId)
         {
             return await _context.Columns
-                .Where(column => column.boardId == boardId)
+                .Where(column => column.BoardId == boardId)
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<Item>> GetItemsFromColumnId(long columnId)
         {
             return await _context.Items
-                .Where(item => item.columnId == columnId)
+                .Where(item => item.ColumnId == columnId)
                 .ToListAsync();
         }
 
@@ -50,7 +52,7 @@ namespace RazorPagesApplication.DataAccess
         public async Task<Board> CreateBoard(Board board)
         {
             _context.Boards.Add(board);
-            var result = await _context.SaveCangesAsync();
+            var result = await _context.SaveChangesAsync();
             if(result > 0)
             {
                 return board;
@@ -61,7 +63,7 @@ namespace RazorPagesApplication.DataAccess
         public async Task<Column> CreateColumn(Column column)
         {
             _context.Columns.Add(column);
-            var result = await _context.SaveCangesAsync();
+            var result = await _context.SaveChangesAsync();
             if(result > 0)
             {
                 return column;
@@ -72,7 +74,7 @@ namespace RazorPagesApplication.DataAccess
         public async Task<Item> CreateItem(Item item)
         {
             _context.Items.Add(item);
-            var result = await _context.SaveCangesAsync();
+            var result = await _context.SaveChangesAsync();
             if(result > 0)
             {
                 return item;

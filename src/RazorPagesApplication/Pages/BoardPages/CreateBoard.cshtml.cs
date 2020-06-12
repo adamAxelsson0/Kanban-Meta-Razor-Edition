@@ -34,7 +34,9 @@ namespace RazorPagesApplication.Pages.BoardPages
             // TODO: Save to database
             //Board board = await 
             //return RedirectToPage($"/Board/{board.Id}");
-            board = new Board(1, boardTitle);
+            // board = new Board(1, boardTitle);
+
+            
 
             return RedirectToPage("/BoardPages/ViewBoard", new {id = board.Id});
         }
