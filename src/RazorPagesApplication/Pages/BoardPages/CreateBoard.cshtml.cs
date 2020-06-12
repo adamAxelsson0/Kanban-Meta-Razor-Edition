@@ -6,39 +6,44 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using RazorPagesApplication.Models;
+using RazorPagesApplication.DataAccess;
 
 namespace RazorPagesApplication.Pages.BoardPages
 {
     public class CreateBoardModel : PageModel
     {
         private readonly ILogger<CreateBoardModel> _logger;
+        private readonly BoardService _service;
 
         private Board board { get; set; }
 
-        public CreateBoardModel(ILogger<CreateBoardModel> logger)
+        public CreateBoardModel(ILogger<CreateBoardModel> logger, BoardService service)
         {
             _logger = logger;
+            _service = service;
         }
+
         public void OnGet()
         {
 
         }
-        public IActionResult OnPost()
+
+        public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            //Send this item
             var boardTitle = Request.Form["create-board-title"];
-            // TODO: Save to database
-            //Board board = await 
-            //return RedirectToPage($"/Board/{board.Id}");
-            // board = new Board(1, boardTitle);
 
-            
+            Board board = new Board(boardTitle);
 
-            return RedirectToPage("/BoardPages/ViewBoard", new {id = board.Id});
+            board = await _service.CreateBoard(board);
+
+            return RedirectToPage("/BoardPages/ViewBoard", new
+            {
+                id = board.Id
+            });
         }
     }
 }

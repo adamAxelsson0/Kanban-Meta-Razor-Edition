@@ -11,13 +11,19 @@ namespace RazorPagesApplication.Models
         public string Title { get; private set; }
         public List<Column> Columns { get; private set; }
 
-        public Board(long id, string title){
-            this.Id = id;
+        public Board()
+        {
+
+        }
+
+        public Board(string title)
+        {
             this.Title = title;
             this.Columns = new List<Column>();
         }
         //TODO Save to database.
-        public void AddColumn(Column column){
+        public void AddColumn(Column column)
+        {
             this.Columns.Add(column);
         }
     }

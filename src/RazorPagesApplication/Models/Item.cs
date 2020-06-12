@@ -11,6 +11,11 @@ namespace RazorPagesApplication.Models
         public long ColumnId { get; private set; }
         public Column Column { get; private set; }
 
+        public Item()
+        {
+
+        }
+
         public Item(long id, string title, string description, Column column)
         {
             this.Id = id;

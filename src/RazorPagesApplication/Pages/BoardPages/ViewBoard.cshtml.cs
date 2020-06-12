@@ -49,7 +49,7 @@ namespace RazorPagesApplication.Pages.BoardPages
         }
         public void CreateBoard(long id)
         {
-            Board = new Board(id, "Placeholder title");
+            Board = new Board("Placeholder title");
         }
     }
 }
