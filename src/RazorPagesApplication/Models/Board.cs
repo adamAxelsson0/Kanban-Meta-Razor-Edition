@@ -16,9 +16,5 @@ namespace RazorPagesApplication.Models
             this.Title = title;
             this.Columns = new List<Column>();
         }
-        //TODO Save to database.
-        public void AddColumn(Column column){
-            this.Columns.Add(column);
-        }
     }
 }

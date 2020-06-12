@@ -14,6 +14,7 @@ namespace RazorPagesApplication.Pages.BoardPages
         private readonly ILogger<ViewBoardModel> _logger;
         public Column Column { get; set; }
         public Board Board { get; set; }
+        public Item Item { get; set; }
 
         public ViewBoardModel(ILogger<ViewBoardModel> logger)
         {
@@ -25,13 +26,25 @@ namespace RazorPagesApplication.Pages.BoardPages
             CreateBoard(id);
 
         }
-        public IActionResult OnPost(int id)
+        public IActionResult OnPostCreateColumn(long boardId)
         {
-            var columnTitle = Request.Form["create-column"];
-            Column = new Column(1, columnTitle);
+            var columnTitle = Request.Form["create-column-title"];
 
-            CreateBoard(id);
-            Board.AddColumn(Column);
+            //TODO CRUD OPERATION
+            CreateBoard(boardId);
+            Column = new Column(1, columnTitle, Board);
+
+            return RedirectToPage("/BoardPages/ViewBoard", new { id = Board.Id });
+        }
+        public IActionResult OnPostCreateItem(long columnId)
+        {
+            var itemTitle = Request.Form["create-item"];
+
+            //TODO CRUD OPERATION
+            CreateBoard(1);
+            Column = new Column(columnId, "PlaceHolder", Board);
+            Item = new Item(1, itemTitle, "description", Column);
+
             return RedirectToPage("/BoardPages/ViewBoard", new { id = Board.Id });
         }
         public void CreateBoard(long id)

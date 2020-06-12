@@ -12,10 +12,13 @@ namespace RazorPagesApplication.Models
         public long BoardId { get; private set; }
         public Board Board { get; private set; }
         public List<Item> Items { get; private set; }
-        public Column(long id, string title)
+        public Column(long id, string title, Board board)
         {
-            
+            this.Id = id;
+            this.Title = title;
+            this.BoardId = board.Id;
+            this.Board = board;
+            this.Items = new List<Item>();
         }
-
     }
 }
