@@ -37,6 +37,7 @@ namespace RazorPagesApplication.DataAccess
         public async Task<Board> GetBoard(long id)
         {
             return await _context.Boards
+                .Where(x => x.Id == id)
                 .Include(x => x.Columns)
                 .ThenInclude(x => x.Items)
                 .FirstOrDefaultAsync();
@@ -45,6 +46,7 @@ namespace RazorPagesApplication.DataAccess
         public async Task<Column> GetColumn(long id)
         {
             return await _context.Columns
+                .Where(x => x.Id == id)
                 .Include(x => x.Items)
                 .FirstOrDefaultAsync();
         }
