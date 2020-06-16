@@ -94,7 +94,6 @@ namespace RazorPagesApplication.DataAccess
             throw new System.Exception("Could not save item to database.");
         }
 
-<<<<<<< HEAD
         // FIXME What should delete operations return??
         public async Task<Board> DeleteBoard(Board board)
         {
@@ -112,7 +111,8 @@ namespace RazorPagesApplication.DataAccess
 
             if(result > 0) { return board; }
             else { throw new Exception("Failed to save changes to database"); }
-=======
+        }
+        
         public async Task<Column> DeleteColumn(long id)
         {
             var column = await GetColumn(id);
@@ -140,7 +140,6 @@ namespace RazorPagesApplication.DataAccess
             {
                 throw;
             }
->>>>>>> 13a5f1e49c6d3bc34d5beb847291d20e963ada8d
         }
     }
 }
