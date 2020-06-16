@@ -95,7 +95,8 @@ namespace RazorPagesApplication.DataAccess
 
         public async Task<Column> DeleteColumn(long id)
         {
-            var column = await _context.Columns.FindAsync(id);
+            var column = await GetColumn(id);
+
             if (column == null)
             {
                 throw new TaskCanceledException("Column not found.");
@@ -107,18 +108,18 @@ namespace RazorPagesApplication.DataAccess
         }
 
         public async Task<Item> EditItem(Item item)
-            {
+        {
 
-                _context.Entry(item).State = EntityState.Modified;
-                try
-                {
-                    await _context.SaveChangesAsync();
-                    return item;
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    throw;
-                }
+            _context.Entry(item).State = EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+                return item;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
             }
         }
     }
+}
