@@ -12,9 +12,11 @@
     {
         <div class="card m-1 min-vw-20 mb-4" style="background-color: lightgray; width: 20rem;">
             <div class="card-body">
-                <form method="post"  asp-page-handler="DeleteColumn" asp-route-boardId="@Model.Board.Id">
-                <button type="submit" class="close" data-dismiss="alert">x</button>
+
+                <form method="post"  asp-page-handler="DeleteColumn" asp-route-columnId="@column.Id">
+                <button type="submit" class="close">x</button>
                 </form>
+
             <h5 class="card-title">@column.Title</h5>
             @foreach (var item in column.Items)
             {
