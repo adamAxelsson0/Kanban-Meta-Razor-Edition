@@ -7,33 +7,34 @@
 {
 <h3>Id = @Model.Board.Id</h3>
 <h3>Board Title = @Model.Board.Title</h3>
+    <div class="card-deck">
     @foreach (var column in Model.Board.Columns)
     {
-    <div class="card-deck">
         <div class="card">
             <div class="card-body">
-            <h5 class="card-title">@Model.Board.Columns</h5>
+            <h5 class="card-title">@column.Title</h5>
             @foreach (var item in column.Items)
             {
             <div class="card">
             <div class="card-body">
-            <h5 class="card-title">Card title</h5>
+            <h5 class="card-title">@item.Title</h5>
+            <p class="card-description">Description: @item.Description</p>
             </div>
             </div>
             }
             <form method="post"  asp-page-handler="CreateItem" asp-route-columnId="@column.Id">
                 <div class="form-group">
-                <label for="create-item">New Item:</label>
-                <input type="text" class="form-control" id="create-item" placeholder="New Item..." name="create-item">
+                <label for="create-item-title">New Item:</label>
+                <input type="text" class="form-control" idz="create-item-title" placeholder="New Item..." name="create-item-title">
+                <label for="create-item-description">Description:</label>
+                <input type="text" class="form-control" idz="create-item-description" placeholder="New Item..." name="create-item-description">
                 </div>
             <button type="submit" class="btn btn-primary">Submit</button>
             </form>
             </div>
         </div>
-    </div>
     }
-    <div class="card-deck">
-        <div class="card" style="display:inline-flex; width: 18rem;">
+    <div class="card" style="display:inline-flex; width: 18rem;">
             <div class="card-body">
             <form method="post"  asp-page-handler="CreateColumn" asp-route-boardId="@Model.Board.Id">
                 <div class="form-group">

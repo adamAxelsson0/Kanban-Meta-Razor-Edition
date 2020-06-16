@@ -18,9 +18,8 @@ namespace RazorPagesApplication.Models
 
         }
 
-        public Column(long id, string title, Board board)
+        public Column(string title, Board board)
         {
-            this.Id = id;
             this.Title = title;
             this.BoardId = board.Id;
             this.Board = board;

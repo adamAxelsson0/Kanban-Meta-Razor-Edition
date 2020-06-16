@@ -16,9 +16,8 @@ namespace RazorPagesApplication.Models
 
         }
 
-        public Item(long id, string title, string description, Column column)
+        public Item(string title, string description, Column column)
         {
-            this.Id = id;
             this.Title = title;
             this.ColumnId = column.Id;
             this.Column = column;

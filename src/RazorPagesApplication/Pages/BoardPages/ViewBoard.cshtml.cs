@@ -6,50 +6,59 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using RazorPagesApplication.Models;
+using RazorPagesApplication.DataAccess;
 
 namespace RazorPagesApplication.Pages.BoardPages
 {
     public class ViewBoardModel : PageModel
     {
         private readonly ILogger<ViewBoardModel> _logger;
-        public Column Column { get; set; }
+        private readonly BoardService _service;
         public Board Board { get; set; }
-        public Item Item { get; set; }
 
-        public ViewBoardModel(ILogger<ViewBoardModel> logger)
+        public ViewBoardModel(ILogger<ViewBoardModel> logger, BoardService service)
         {
             _logger = logger;
+            _service = service;
         }
-        public void OnGet(int id)
+        public async Task OnGet(int id)
         {
-            //TODO GET BOARD, placeholder for now
-            CreateBoard(id);
-
+            Board = await _service.GetBoard(id);
         }
-        public IActionResult OnPostCreateColumn(long boardId)
+        public async Task<IActionResult> OnPostCreateColumn(long boardId)
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
             var columnTitle = Request.Form["create-column-title"];
 
-            //TODO CRUD OPERATION
-            CreateBoard(boardId);
-            Column = new Column(1, columnTitle, Board);
+            var board = await _service.GetBoard(boardId);
+            Column column = new Column(columnTitle, board);
+            column = await _service.CreateColumn(column);
 
-            return RedirectToPage("/BoardPages/ViewBoard", new { id = Board.Id });
+            return RedirectToPage("/BoardPages/ViewBoard", new
+            {
+                id = column.Board.Id
+            });
         }
-        public IActionResult OnPostCreateItem(long columnId)
+        public async Task<IActionResult> OnPostCreateItem(long columnId)
         {
-            var itemTitle = Request.Form["create-item"];
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            var itemTitle = Request.Form["create-item-title"];
+            var description = Request.Form["create-item-description"];
 
-            //TODO CRUD OPERATION
-            CreateBoard(1);
-            Column = new Column(columnId, "PlaceHolder", Board);
-            Item = new Item(1, itemTitle, "description", Column);
+            var column = await _service.GetColumn(columnId);
+            Item item = new Item(itemTitle, description, column);
+            item = await _service.CreateItem(item);
 
-            return RedirectToPage("/BoardPages/ViewBoard", new { id = Board.Id });
-        }
-        public void CreateBoard(long id)
-        {
-            Board = new Board("Placeholder title");
+            return RedirectToPage("/BoardPages/ViewBoard", new
+            {
+                id = item.Column.Board.Id
+            });
         }
     }
 }
