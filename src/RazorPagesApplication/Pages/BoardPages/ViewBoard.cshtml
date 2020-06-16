@@ -12,6 +12,9 @@
     {
         <div class="card m-1 min-vw-20 mb-4" style="background-color: lightgray; width: 20rem;">
             <div class="card-body">
+                <form method="post"  asp-page-handler="DeleteColumn" asp-route-boardId="@Model.Board.Id">
+                <button type="submit" class="close" data-dismiss="alert">x</button>
+                </form>
             <h5 class="card-title">@column.Title</h5>
             @foreach (var item in column.Items)
             {
@@ -36,6 +39,7 @@
     }
             <div class="card" style="display:inline-flex; width: 18rem;">
                     <div class="card-body">
+
                     <form method="post"  asp-page-handler="CreateColumn" asp-route-boardId="@Model.Board.Id">
                         <div class="form-group">
                         <label for="create-column-title">Add Column:</label>
