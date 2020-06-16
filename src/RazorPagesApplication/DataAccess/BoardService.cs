@@ -1,5 +1,5 @@
 using RazorPagesApplication.Context;
-using Microsoft.EntityFrameworkCore;  
+using Microsoft.EntityFrameworkCore;
 using RazorPagesApplication.Models;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace RazorPagesApplication.DataAccess
 {
     public class BoardService
     {
-        private readonly KanbanContext _context; 
+        private readonly KanbanContext _context;
         public BoardService(KanbanContext context)
         {
             _context = context;
@@ -19,7 +19,7 @@ namespace RazorPagesApplication.DataAccess
         {
             return await _context.Boards.ToListAsync();
         }
-        
+
         public async Task<IEnumerable<Column>> GetColumnsFromBoardId(long boardId)
         {
             return await _context.Columns
@@ -51,12 +51,20 @@ namespace RazorPagesApplication.DataAccess
                 .Include(x => x.Items)
                 .FirstOrDefaultAsync();
         }
+        public async Task<Item> GetItem(long id)
+        {
+            return await _context.Items
+                .Where(x => x.Id == id)
+                .Include(c => c.Column)
+                .ThenInclude(b => b.Board)
+                .FirstOrDefaultAsync();
+        }
 
         public async Task<Board> CreateBoard(Board board)
         {
             _context.Boards.Add(board);
             var result = await _context.SaveChangesAsync();
-            if(result > 0)
+            if (result > 0)
             {
                 return board;
             }
@@ -67,7 +75,7 @@ namespace RazorPagesApplication.DataAccess
         {
             _context.Columns.Add(column);
             var result = await _context.SaveChangesAsync();
-            if(result > 0)
+            if (result > 0)
             {
                 return column;
             }
@@ -78,11 +86,25 @@ namespace RazorPagesApplication.DataAccess
         {
             _context.Items.Add(item);
             var result = await _context.SaveChangesAsync();
-            if(result > 0)
+            if (result > 0)
             {
                 return item;
             }
             throw new System.Exception("Could not save item to database.");
+        }
+        public async Task<Item> EditItem(Item item)
+        {
+
+            _context.Entry(item).State = EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+                return item;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
         }
     }
 }
