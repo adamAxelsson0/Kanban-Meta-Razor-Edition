@@ -22,29 +22,37 @@ namespace RazorPagesApplication
         {
            _logger = logger;
            _service = service; 
+           Messages = new List<string>();
         }
-        public async Task OnGet(int id)
+        public async Task OnGet(long boardId)
         {
-            ActiveBoard = await _service.GetBoard((long)id);
+            ActiveBoard = await _service.GetBoard(boardId);
         }
 
-        public async Task<IActionResult> OnDeleteBoard(Board board)
+        public async Task<IActionResult> OnPostDeleteBoard(long boardId)
         {
             try 
             {
-                await _service.DeleteBoard(ActiveBoard);
-                return RedirectToPage("viewboard", new { board.Id });
+                var board = await _service.GetBoard(boardId);
+                await _service.DeleteBoard(board);
+                return RedirectToPage("/Index");
             }
             catch(Exception ex)
             {
                 Messages.Add(ex.Message);
                 // Redirect to appropriate page
-                return null;
+                // Send messages back to page
+                return Page();
             }
         }
 
-        public async Task<IActionResult> OnPutEditBoard(Board board)
+        public async Task<IActionResult> OnPostEditBoard(int boardId)
         {
+            // Create new Board form form input.
+            var board = await _service.GetBoard(boardId);
+            var newTitle = Request.Form["edit-board-title"];
+            board.ChangeTitle(newTitle);
+            
             try
             {
                 await _service.EditBoard(board);

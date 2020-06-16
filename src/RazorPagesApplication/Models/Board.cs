@@ -26,5 +26,10 @@ namespace RazorPagesApplication.Models
         {
             this.Columns.Add(column);
         }
+
+        public void ChangeTitle(string title)
+        {
+            this.Title = title;
+        }
     }
 }
