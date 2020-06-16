@@ -29,7 +29,7 @@ namespace RazorPagesApplication
             services.AddRazorPages();
             services.AddScoped<BoardService>();
             services.AddDbContext<KanbanContext>(options => {
-                options.UseSqlite("data source=data/kanban.db");
+                options.UseSqlite("data source=kanban.db");
             });
         }
 
