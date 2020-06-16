@@ -4,6 +4,7 @@ using RazorPagesApplication.Models;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace RazorPagesApplication.DataAccess
 {
@@ -91,11 +92,17 @@ namespace RazorPagesApplication.DataAccess
             _context.Boards.Remove(board);
             var result = await _context.SaveChangesAsync(); 
 
-            if(result > 1) { return board; }
-            else 
-            {
-                return null;
-            }
+            if(result > 0) { return board; }
+            else { throw new Exception("Failed to save changes to database"); }
+        }
+
+        public async Task<Board> EditBoard(Board board)
+        {
+            _context.Boards.Update(board);
+            var result = await _context.SaveChangesAsync();
+
+            if(result > 0) { return board; }
+            else { throw new Exception("Failed to save changes to database"); }
         }
     }
 }
