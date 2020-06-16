@@ -92,6 +92,21 @@ namespace RazorPagesApplication.DataAccess
             }
             throw new System.Exception("Could not save item to database.");
         }
+
+        public async Task<Column> DeleteColumn(long id)
+        {
+            var column = await GetColumn(id);
+
+            if (column == null)
+            {
+                throw new TaskCanceledException("Column not found.");
+            }
+            _context.Columns.Remove(column);
+            await _context.SaveChangesAsync();
+
+            return column;
+        }
+
         public async Task<Item> EditItem(Item item)
         {
 

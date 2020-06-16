@@ -60,8 +60,23 @@ namespace RazorPagesApplication.Pages.BoardPages
                 id = item.Column.Board.Id
             });
         }
-        public IActionResult EditItem(long itemId){
-            Console.WriteLine("I was here");
+
+        public async Task<IActionResult> OnPostDeleteColumn(long columnId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            var column = await _service.DeleteColumn(columnId);
+
+            return RedirectToPage("/BoardPages/ViewBoard", new
+            {
+                id = column.Board.Id
+            });
+        }
+        public IActionResult EditItem(long itemId)
+        {
             return RedirectToPage("/ItemPages/EditItem", new
             {
                 id = itemId
