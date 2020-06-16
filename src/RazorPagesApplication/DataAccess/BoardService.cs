@@ -4,6 +4,7 @@ using RazorPagesApplication.Models;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace RazorPagesApplication.DataAccess
 {
@@ -93,6 +94,25 @@ namespace RazorPagesApplication.DataAccess
             throw new System.Exception("Could not save item to database.");
         }
 
+        // FIXME What should delete operations return??
+        public async Task<Board> DeleteBoard(Board board)
+        {
+            _context.Boards.Remove(board);
+            var result = await _context.SaveChangesAsync(); 
+
+            if(result > 0) { return board; }
+            else { throw new Exception("Failed to save changes to database"); }
+        }
+
+        public async Task<Board> EditBoard(Board board)
+        {
+            _context.Boards.Update(board);
+            var result = await _context.SaveChangesAsync();
+
+            if(result > 0) { return board; }
+            else { throw new Exception("Failed to save changes to database"); }
+        }
+        
         public async Task<Column> DeleteColumn(long id)
         {
             var column = await GetColumn(id);
