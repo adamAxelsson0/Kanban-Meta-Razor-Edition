@@ -60,5 +60,12 @@ namespace RazorPagesApplication.Pages.BoardPages
                 id = item.Column.Board.Id
             });
         }
+        public IActionResult EditItem(long itemId){
+            Console.WriteLine("I was here");
+            return RedirectToPage("/ItemPages/EditItem", new
+            {
+                id = itemId
+            });
+        }
     }
 }

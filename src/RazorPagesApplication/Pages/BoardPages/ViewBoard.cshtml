@@ -19,6 +19,7 @@
             <div class="card-body p-2">
             <h5 class="card-title">@item.Title</h5>
             <p class="card-description">Description: @item.Description</p>
+            <a asp-area="" asp-route-id="@item.Id" asp-page="/ItemPages/EditItem" class="stretched-link"></a>
             </div>
             </div>
             }
