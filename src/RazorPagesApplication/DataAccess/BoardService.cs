@@ -47,6 +47,7 @@ namespace RazorPagesApplication.DataAccess
         {
             return await _context.Columns
                 .Where(x => x.Id == id)
+                .Include(b => b.Board)
                 .Include(x => x.Items)
                 .FirstOrDefaultAsync();
         }
