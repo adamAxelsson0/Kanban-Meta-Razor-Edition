@@ -24,5 +24,13 @@ namespace RazorPagesApplication.Models
             this.Description = description;
         }
 
+        public Item EditItem(string title, string description, Column column){
+            this.Title = title;
+            this.Description = description;
+            this.ColumnId = column.Id;
+            this.Column = column;
+            return this;
+        }
+
     }
 }
