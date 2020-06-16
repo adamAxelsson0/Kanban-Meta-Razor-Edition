@@ -84,5 +84,18 @@ namespace RazorPagesApplication.DataAccess
             }
             throw new System.Exception("Could not save item to database.");
         }
+
+        // FIXME What should delete operations return??
+        public async Task<Board> DeleteBoard(Board board)
+        {
+            _context.Boards.Remove(board);
+            var result = await _context.SaveChangesAsync(); 
+
+            if(result > 1) { return board; }
+            else 
+            {
+                return null;
+            }
+        }
     }
 }
