@@ -132,7 +132,7 @@ namespace RazorPagesApplication.DataAccess
 
             if (item == null)
             {
-                throw new TaskCanceledException("Column not found.");
+                throw new TaskCanceledException("Item not found.");
             }
             _context.Items.Remove(item);
             await _context.SaveChangesAsync();
