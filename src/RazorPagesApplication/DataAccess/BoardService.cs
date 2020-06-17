@@ -126,6 +126,19 @@ namespace RazorPagesApplication.DataAccess
 
             return column;
         }
+        public async Task<Item> DeleteItem(long id)
+        {
+            var item = await GetItem(id);
+
+            if (item == null)
+            {
+                throw new TaskCanceledException("Column not found.");
+            }
+            _context.Items.Remove(item);
+            await _context.SaveChangesAsync();
+
+            return item;
+        }
 
         public async Task<Item> EditItem(Item item)
         {

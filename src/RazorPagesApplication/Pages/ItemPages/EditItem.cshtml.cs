@@ -16,7 +16,7 @@ namespace RazorPagesApplication.Pages.ItemPages
         private readonly BoardService _service;
 
         public Item Item { get; set; }
-        public Board Board {get;set;}
+        public Board Board { get; set; }
 
         public EditItemModel(ILogger<EditItemModel> logger, BoardService service)
         {
@@ -37,7 +37,7 @@ namespace RazorPagesApplication.Pages.ItemPages
                 return Page();
             }
             Item = await _service.GetItem(id);
-            
+
             var itemTitle = Request.Form["item-title"];
             var itemDescription = Request.Form["item-description"];
             long itemColumnId = long.Parse(Request.Form["item-column"]);
@@ -51,6 +51,16 @@ namespace RazorPagesApplication.Pages.ItemPages
             return RedirectToPage("/BoardPages/ViewBoard", new
             {
                 id = Item.Column.Board.Id
+            });
+        }
+        public async Task<IActionResult> OnPostDeleteItem(long itemId)
+        {
+
+            var item = await _service.GetItem(itemId);
+            item = await _service.DeleteItem(itemId);
+            return RedirectToPage("/BoardPages/ViewBoard", new
+            {
+                id = item.Column.Board.Id
             });
         }
     }
