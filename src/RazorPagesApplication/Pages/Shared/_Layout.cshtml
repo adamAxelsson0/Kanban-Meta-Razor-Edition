@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject RazorPagesApplication.DataAccess.BoardService boardService
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -39,12 +40,10 @@
                         Choose Board
                         </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        @*@foreach (var board in boards)
+                        @foreach (var board in await boardService.GetBoards())
                         {
-                            
-                        }*@
-                     <a class="dropdown-item" href="https://localhost:5001/BoardPages/viewboard/1">BoardPlaceHolderID1</a>
-                      <a class="dropdown-item" href="https://localhost:5001/BoardPages/viewboard/2">BoardPlaceHolderID2</a>
+                        <a class="dropdown-item" asp-route-id="@board.Id" asp-page="/BoardPages/ViewBoard">@board.Title</a>  
+                        }
                     </div>
                      </li>
                     </ul>
