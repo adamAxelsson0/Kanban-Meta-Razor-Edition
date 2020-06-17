@@ -16,16 +16,14 @@
         Edit
         </a>
     </div>
-        <div class="row flex-nowrap pl-4">
+        <div class="row flex-nowrap pl-4 align-items-start">
     @foreach (var column in Model.Board.Columns)
     {
         <div class="card min-vw-20 mb-4 ml-2" style="background: rgb(165, 213, 255); width: 20rem;">
             <div class="card-body">
-
                 <form method="post"  asp-page-handler="DeleteColumn" asp-route-columnId="@column.Id">
                 <button type="submit" class="close">x</button>
                 </form>
-
             <h5 class="card-title">@column.Title</h5>
             @foreach (var item in column.Items)
             {
