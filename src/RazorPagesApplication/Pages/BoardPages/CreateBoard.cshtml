@@ -1,0 +1,15 @@
+@page
+@model CreateBoardModel
+@{
+    ViewData["Title"] = "Create Board";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+          <div class="form-group">
+            <label for="create-board-title" class="col-form-label">Create Board:</label>
+            <input type="text" class="form-control" id="create-board-title" name="create-board-title" placeholder="Create board...">
+<br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+</form>

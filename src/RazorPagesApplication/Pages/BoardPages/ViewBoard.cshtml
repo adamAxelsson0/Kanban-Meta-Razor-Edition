@@ -1,0 +1,63 @@
+@page "{id}"
+@model ViewBoardModel
+@{
+    ViewData["Title"] = "View Board";
+}
+@if (Model.Board != null)
+{
+    <div class="row pl-2 ml-2 mb-2">
+        <h3>@Model.Board.Title</h3>
+        <a 
+        role="button"
+        class="btn btn-primary ml-2"
+        asp-area=""
+        asp-page="/BoardPages/EditBoard"
+        asp-route-boardId="@Model.Board.Id">
+        Edit
+        </a>
+    </div>
+        <div class="row flex-nowrap pl-4 align-items-start">
+    @foreach (var column in Model.Board.Columns)
+    {
+        <div class="card min-vw-20 mb-4 ml-2" style="background: rgb(165, 213, 255); width: 20rem;">
+            <div class="card-body">
+                <form method="post"  asp-page-handler="DeleteColumn" asp-route-columnId="@column.Id">
+                <button type="submit" class="close">x</button>
+                </form>
+            <h5 class="card-title">@column.Title</h5>
+            @foreach (var item in column.Items)
+            {
+            <div class="card">
+            <div class="card-body p-2">
+            <h5 class="card-title">@item.Title</h5>
+            <p class="card-description">Description: @item.Description</p>
+            <a asp-area="" asp-route-id="@item.Id" asp-page="/ItemPages/EditItem" class="stretched-link"></a>
+            </div>
+            </div>
+            }
+            <form method="post"  asp-page-handler="CreateItem" asp-route-columnId="@column.Id">
+                <div class="form-group">
+                <label for="create-item-title">New Item:</label>
+                <input type="text" class="form-control" idz="create-item-title" placeholder="Title..." name="create-item-title">
+                <input type="text" class="form-control" idz="create-item-description" placeholder="Description..." name="create-item-description">
+                </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            </div>
+        </div>
+    }
+            <div class="card ml-2" style="display:inline-flex; width: 18rem;">
+                    <div class="card-body">
+
+                    <form method="post"  asp-page-handler="CreateColumn" asp-route-boardId="@Model.Board.Id">
+                        <div class="form-group">
+                        <label for="create-column-title">Add Column:</label>
+                        <input type="text" class="form-control" id="create-column-title" placeholder="Backlog..."name="create-column-title">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+}
+        
